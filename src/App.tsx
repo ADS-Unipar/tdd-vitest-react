@@ -6,7 +6,15 @@ function App() {
 
   return (
     <>
-      <Card/>
+      <Card
+        button1Text='btn1'
+        button2Text='btn2'
+        onAction1={() => alert(1)}
+        onAction2={() => alert(2)}
+        text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus.'
+        title='Lorem ipsum dolor'
+        imageUrl='https://rickandmortyapi.com/api/character/avatar/656.jpeg'
+      />
     </>
   )
 }

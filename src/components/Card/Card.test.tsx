@@ -74,4 +74,22 @@ describe('Card', () => {
     const { asFragment } = render(<Card onAction1={mockFunction1} onAction2={mockFunction2} title={title} text={text} imageUrl={imageUrl} button1Text={button1Text} button2Text={button2Text} />);
     expect(asFragment()).toMatchSnapshot();
   });
+
+  it('Não deve apresentar o texto caso ele não seja passado', () => {
+    render(<Card onAction1={mockFunction1} onAction2={mockFunction2} title={title} imageUrl={imageUrl} button1Text={button1Text} button2Text={button2Text} />);
+    expect(screen.queryByTestId('text')).not.toBeInTheDocument();
+  });
+
+  it('Não deve renderizar o botão1 caso o texto button1Text não esteja nas propriedades ', () => {
+    render(<Card onAction1={mockFunction1} onAction2={mockFunction2} title={title} text={text} imageUrl={imageUrl}  button2Text={button2Text} />);
+    expect(screen.queryByRole('button', {description: button1Text})).not.toBeInTheDocument();
+    expect(screen.getAllByRole('button').length).toBe(1);
+  });
+
+  it('Não deve renderizar o botão1 caso a função onAction1 não esteja nas propriedades ', () => { 
+    render(<Card onAction2={mockFunction2} title={title} text={text} imageUrl={imageUrl} button1Text={button1Text} button2Text={button2Text} />);
+    expect(screen.queryByRole('button', {description: button1Text})).not.toBeInTheDocument();
+    expect(screen.getAllByRole('button').length).toBe(1);
+  });
+
 });
